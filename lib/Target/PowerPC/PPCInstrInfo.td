@@ -412,6 +412,14 @@ def crrc : RegisterOperand<CRRC> {
   let ParserMatchClass = PPCRegCRRCAsmOperand;
 }
 
+def PPCU1ImmAsmOperand : AsmOperandClass {
+  let Name = "U1Imm"; let PredicateMethod = "isU1Imm";
+  let RenderMethod = "addImmOperands";
+}
+def u1imm   : Operand<i32> {
+  let PrintMethod = "printU1ImmOperand";
+  let ParserMatchClass = PPCU1ImmAsmOperand;
+}
 def PPCU2ImmAsmOperand : AsmOperandClass {
   let Name = "U2Imm"; let PredicateMethod = "isU2Imm";
   let RenderMethod = "addImmOperands";
@@ -419,6 +427,14 @@ def PPCU2ImmAsmOperand : AsmOperandClass {
 def u2imm   : Operand<i32> {
   let PrintMethod = "printU2ImmOperand";
   let ParserMatchClass = PPCU2ImmAsmOperand;
+}
+def PPCU3ImmAsmOperand : AsmOperandClass {
+  let Name = "U3Imm"; let PredicateMethod = "isU3Imm";
+  let RenderMethod = "addImmOperands";
+}
+def u3imm   : Operand<i32> {
+  let PrintMethod = "printU3ImmOperand";
+  let ParserMatchClass = PPCU3ImmAsmOperand;
 }
 def PPCS5ImmAsmOperand : AsmOperandClass {
   let Name = "S5Imm"; let PredicateMethod = "isS5Imm";
@@ -2456,6 +2472,7 @@ def : Pat<(fcopysign f64:$frB, f32:$frA),
 def : Pat<(fcopysign f32:$frB, f64:$frA),
           (FCPSGNS (COPY_TO_REGCLASS $frA, F4RC), $frB)>;
 
+include "PPCInstrPaired.td"
 include "PPCInstrAltivec.td"
 include "PPCInstr64Bit.td"
 include "PPCInstrVSX.td"

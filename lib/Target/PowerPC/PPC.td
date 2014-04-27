@@ -53,6 +53,8 @@ def Feature64BitRegs : SubtargetFeature<"64bitregs","Use64BitRegs", "true",
                               "Enable 64-bit registers usage for ppc32 [beta]">;
 def FeatureCRBits    : SubtargetFeature<"crbits", "UseCRBits", "true",
                               "Use condition-register bits individually">;
+def FeaturePaired    : SubtargetFeature<"paired", "HasPaired", "true",
+                                        "Enable Paired-Single instructions">;
 def FeatureAltivec   : SubtargetFeature<"altivec","HasAltivec", "true",
                                         "Enable Altivec instructions">;
 def FeatureMFOCRF    : SubtargetFeature<"mfocrf","HasMFOCRF", "true",
@@ -197,6 +199,9 @@ def : Processor<"620", G3Itineraries, [Directive620,
                                        FeatureFRES, FeatureFRSQRTE]>;
 def : Processor<"750", G4Itineraries, [Directive750,
                                        FeatureFRES, FeatureFRSQRTE]>;
+def : Processor<"750cl", G4Itineraries, [Directive750,
+                                         FeatureFRES, FeatureFRSQRTE,
+                                         FeatureSTFIWX, FeaturePaired]>;
 def : Processor<"g3", G3Itineraries, [Directive750,
                                       FeatureFRES, FeatureFRSQRTE]>;
 def : Processor<"7400", G4Itineraries, [Directive7400, FeatureAltivec,

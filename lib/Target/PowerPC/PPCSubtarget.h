@@ -75,6 +75,7 @@ protected:
   bool Use64BitRegs;
   bool UseCRBits;
   bool IsPPC64;
+  bool HasPaired;
   bool HasAltivec;
   bool HasQPX;
   bool HasVSX;
@@ -176,6 +177,7 @@ public:
   bool hasLFIWAX() const { return HasLFIWAX; }
   bool hasFPRND() const { return HasFPRND; }
   bool hasFPCVT() const { return HasFPCVT; }
+  bool hasPaired() const { return HasPaired; }
   bool hasAltivec() const { return HasAltivec; }
   bool hasQPX() const { return HasQPX; }
   bool hasVSX() const { return HasVSX; }
